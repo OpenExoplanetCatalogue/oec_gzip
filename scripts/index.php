@@ -1,3 +1,3 @@
 <?
-file_put_contents("pushneeded.pid", "");
+file_put_contents("pushneeded.txt", "");
 ?>
