@@ -9,11 +9,13 @@ if [[ ! -f $LOCKFILE ]]; then
 
 		rm -rf tmp
 		mkdir tmp
-		cd tmp
+		
+		pushd tmp
 		wget --no-check-certificate https://github.com/OpenExoplanetCatalogue/open_exoplanet_catalogue/archive/master.zip
 		unzip master
-		cd ..
-		cd oec_gzip
+		popd
+
+		pushd ../oec_gzip
 		FILENAME="systems.xml"
 		rm $FILENAME.gz
 		echo "<systems>" > $FILENAME
@@ -24,7 +26,7 @@ if [[ ! -f $LOCKFILE ]]; then
 		git commit -a -m "Automatic update (via webhook)."
 		git push
 
-		cd ..
+		popd
 		rm -f $PUSHNEEDED
 		rm -f $LOCKFILE
 	fi
